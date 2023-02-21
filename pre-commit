@@ -14,7 +14,8 @@ else
 	set against (git hash-object -t tree /dev/null)
 end
 
-for f in (git diff-index --name-only --diff-filter=ACMR HEAD | grep "\.ipynb")
+for f in (git diff-index --cached --name-only --diff-filter=ACMR HEAD | grep "\.ipynb")
     jupyter-nbconvert --clear-output $f
+    git add $f
 end
 exit 0
